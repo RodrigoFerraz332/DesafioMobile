@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonicModule } from '@ionic/angular';
@@ -24,9 +24,13 @@ export class ChatPage {
   newMessage: string = '';
   isLoading: boolean = false;
 
+  // *** NOVO: Instrução para definir o comportamento do agente de IA ***
+  // Você pode alterar este texto para definir a persona da IA.
+  systemInstruction = 'Seja um assistente de IA prestativo e amigável chamado Neto Digital. Formate suas respostas usando Markdown para melhor legibilidade (use listas, negrito, itálico, etc.).';
+
   constructor() {
     // Mensagem inicial da IA
-    this.messages.push({ sender: 'ia', text: 'Olá! Como posso ajudar você hoje?' });
+    this.messages.push({ sender: 'ia', text: 'Olá! Eu sou o Neto Digital. Como posso ajudar você hoje?' });
   }
 
   /**
@@ -49,29 +53,59 @@ export class ChatPage {
   }
 
   /**
-   * Simula uma chamada de API para um agente de IA.
+   * Realiza uma chamada de API para o modelo Gemini para obter uma resposta.
    * @param prompt A pergunta do usuário.
    */
   private async callAiApi(prompt: string) {
-    // Simula um atraso de rede
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const apiKey = "AIzaSyCQ2aNYGqkSsaxg7goWzDFuUxx6u2o0CLc"; // A chave será fornecida pelo ambiente de execução.
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-    // --- PONTO DE INTEGRAÇÃO DA API ---
-    // Substitua esta lógica pela chamada real à sua API (usando fetch ou HttpClient do Angular)
-    // Exemplo:
-    // const apiKey = 'SUA_CHAVE_DE_API_AQUI';
-    // const apiUrl = 'URL_DA_SUA_API';
-    // const response = await fetch(apiUrl, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-    //   body: JSON.stringify({ prompt: prompt })
-    // });
-    // const data = await response.json();
-    // const aiResponse = data.reply;
-    // ------------------------------------
+    // *** ATUALIZADO: Payload agora inclui a instrução de sistema ***
+    const payload = {
+      contents: [{
+        role: "user",
+        parts: [{ text: prompt }]
+      }],
+      systemInstruction: {
+        parts: [
+          { text: this.systemInstruction }
+        ]
+      }
+    };
 
-    // Resposta simulada
-    const aiResponse = `Esta é uma resposta simulada para a sua pergunta sobre: "${prompt}". Integre sua API aqui para obter respostas reais.`;
+    let aiResponse = 'Desculpe, não consegui processar sua solicitação. Tente novamente.';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result.candidates && result.candidates.length > 0 &&
+        result.candidates[0].content && result.candidates[0].content.parts &&
+        result.candidates[0].content.parts.length > 0) {
+
+        let rawResponse = result.candidates[0].content.parts[0].text;
+
+        // *** ATUALIZADO: Converte Markdown básico para HTML para renderização correta ***
+        aiResponse = rawResponse
+          .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>') // Negrito
+          .replace(/\*(.*?)\*/g, '<i>$1</i>')     // Itálico
+          .replace(/\n/g, '<br>');              // Quebra de linha
+      }
+
+    } catch (error) {
+      console.error('Erro ao chamar a API do Gemini:', error);
+    }
 
     this.isLoading = false;
     this.messages.push({ sender: 'ia', text: aiResponse });
@@ -82,9 +116,8 @@ export class ChatPage {
    * Rola a tela para a mensagem mais recente.
    */
   private scrollToBottom() {
-    // Usamos um pequeno timeout para garantir que o DOM foi atualizado antes de rolar
     setTimeout(() => {
       this.content?.scrollToBottom(300);
-    }, 10);
+    }, 100);
   }
 }
