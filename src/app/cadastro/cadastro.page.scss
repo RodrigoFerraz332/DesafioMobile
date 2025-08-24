@@ -1,0 +1,67 @@
+/* Estilo base para o conteúdo */
+ion-content {
+  --background: #f4f5f8;
+}
+
+.cadastro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Seção do cabeçalho */
+.header-section {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.header-icon {
+  font-size: 5rem; // 80px
+  color: #3880ff; // primary
+  margin-bottom: 1rem;
+}
+
+.header-section h1 {
+  font-size: 1.875rem; // 30px
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.header-section p {
+  margin-top: 0.5rem;
+  color: #6b7280;
+}
+
+/* Contêiner do formulário */
+.cadastro-form {
+  width: 100%;
+  max-width: 28rem;
+}
+
+/* Estilo para os itens de input */
+.input-item {
+  --border-radius: 0.75rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  margin-bottom: 1rem;
+  --highlight-height: 0;
+}
+
+.input-item ion-icon {
+  color: #9ca3af;
+  margin-right: 8px;
+}
+
+.input-item ion-input {
+  color: #374151;
+}
+
+/* Estilo para o botão principal */
+#cadastro-button {
+  --border-radius: 9999px;
+  height: 3rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-top: 1.5rem;
+}

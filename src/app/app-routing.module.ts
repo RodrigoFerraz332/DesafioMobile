@@ -11,6 +11,25 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    // Rota padrão, redireciona para a página de login
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'cadastro',
+    loadComponent: () => import('./cadastro/cadastro.page').then(m => m.CadastroPage)
+  },
+  {
+    path: 'chat',
+    loadComponent: () => import('./chat/chat.page').then( m => m.ChatPage)
+  },
+
 ];
 
 @NgModule({

@@ -1,0 +1,108 @@
+
+  /* Estilo base para o conteúdo */
+ion-content {
+  --background: #f4f5f8;
+}
+
+/* Contêiner principal que centraliza tudo */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Seção do cabeçalho com logo e títulos */
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem; /* 48px */
+}
+
+.logo {
+  width: 9rem; /* 120px */
+  height: 9rem; /* 120px */
+  margin: 0 auto 1rem;
+  border-radius: 9999px; /* full */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.header-section h1 {
+  font-size: 1.875rem; /* 30px */
+  font-weight: 700;
+  color: #1f2937; /* text-gray-800 */
+}
+
+.header-section p {
+  margin-top: 0.5rem; /* 8px */
+  color: #6b7280; /* text-gray-500 */
+}
+
+/* Contêiner do formulário */
+.login-form {
+  width: 100%;
+  max-width: 28rem; /* 448px */
+}
+
+/* Estilo para os itens de input */
+.input-item {
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  margin-bottom: 1rem; /* 16px */
+}
+
+.input-item:last-of-type {
+  margin-bottom: 1.5rem; /* 24px */
+}
+
+.input-item ion-icon {
+  color: #9ca3af; /* text-gray-400 */
+}
+
+.input-item ion-input {
+  color: white; /* text-gray-700 */
+}
+
+/* Estilo para o botão principal */
+#login-button {
+  height: 3rem; /* 48px */
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+}
+
+/* Link de "Esqueceu a senha" */
+.forgot-password-link {
+  text-align: center;
+  margin-top: 1.5rem; /* 24px */
+}
+
+.forgot-password-link a {
+  font-size: 0.875rem; /* 14px */
+  font-weight: 600;
+  color: #4f46e5; /* text-indigo-600 */
+  text-decoration: none;
+}
+
+.forgot-password-link a:hover {
+  color: #6366f1; /* text-indigo-500 */
+}
+
+/* Seção inferior para cadastro */
+.signup-section {
+  position: absolute;
+  bottom: 2rem; /* 32px */
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280; /* text-gray-500 */
+}
+
+.signup-section a {
+  font-weight: 600;
+  color: #4f46e5; /* text-indigo-600 */
+  text-decoration: none;
+}
+
+.signup-section a:hover {
+  color: #6366f1; /* text-indigo-500 */
+}
+
+

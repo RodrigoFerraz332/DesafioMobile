@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Botão para voltar para a tela de login -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" fullscreen>
+  <div class="cadastro-container">
+
+    <!-- Seção do Cabeçalho -->
+    <div class="header-section">
+      <ion-icon name="person-circle-outline" class="header-icon"></ion-icon>
+      <h1>Crie sua Conta</h1>
+      <p>É rápido e fácil!</p>
+    </div>
+
+    <!-- Formulário de Cadastro -->
+    <form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()" class="cadastro-form">
+
+      <!-- Campo de Nome -->
+      <ion-item class="input-item">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input formControlName="name" type="text" placeholder="Seu nome completo"></ion-input>
+      </ion-item>
+
+      <!-- Campo de E-mail -->
+      <ion-item class="input-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input formControlName="email" type="email" placeholder="Seu e-mail"></ion-input>
+      </ion-item>
+
+      <!-- Campo de Senha -->
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input formControlName="password" type="password" placeholder="Crie uma senha"></ion-input>
+      </ion-item>
+
+      <!-- Campo de Confirmação de Senha -->
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input formControlName="confirmPassword" type="password" placeholder="Confirme sua senha"></ion-input>
+      </ion-item>
+
+      <!-- Botão de Cadastro -->
+      <ion-button id="cadastro-button" type="submit" expand="block" shape="round" [disabled]="cadastroForm.invalid">
+        Cadastrar
+      </ion-button>
+
+    </form>
+  </div>
+</ion-content>
