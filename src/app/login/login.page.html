@@ -16,53 +16,46 @@
 <body>
 <ion-app>
   <ion-content class="ion-padding" fullscreen>
-    <div class="login-container">
+  <div class="login-container">
 
-      <!-- Seção do Cabeçalho/Logo -->
-      <div class="header-section">
-        <img src="assets/neto.png" alt="Logo do App" class="logo">
-        <h1>Bem-vindo(a)!</h1>
-        <p>Faça login para continuar</p>
-      </div>
-
-      <!-- Formulário de Login -->
-      <div class="login-form">
-
-        <!-- Campo de E-mail -->
-        <ion-item class="input-item">
-          <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-input type="email" placeholder="Seu e-mail"></ion-input>
-        </ion-item>
-
-        <!-- Campo de Senha -->
-        <ion-item class="input-item">
-          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          <ion-input type="password" placeholder="Sua senha"></ion-input>
-        </ion-item>
-
-        <!-- Botão de Login -->
-        <ion-button id="login-button" expand="block" shape="round">
-          Entrar
-          <ion-icon slot="end" name="arrow-forward"></ion-icon>
-        </ion-button>
-
-        <!-- Link para Esqueceu a Senha -->
-        <div class="forgot-password-link">
-          <a href="#">Esqueceu sua senha?</a>
-        </div>
-
-      </div>
-
-      <!-- Seção de Cadastro -->
-      <div class="signup-section">
-        <p>
-          Não tem uma conta?
-          <a href="./cadastro">Cadastre-se</a>
-        </p>
-      </div>
-
+    <div class="header-section">
+      <img src="assets/neto.png" alt="Logo do App" class="logo">
+      <h1>Bem-vindo(a)!</h1>
+      <p>Faça login para continuar</p>
     </div>
-  </ion-content>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+
+      <ion-item class="input-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Seu e-mail" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-item">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input type="password" placeholder="Sua senha" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" shape="round" type="submit">
+        Entrar
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+
+    </form>
+
+    <div class="forgot-password-link">
+      <a href="#">Esqueceu sua senha?</a>
+    </div>
+
+    <div class="signup-section">
+      <p>
+        Não tem uma conta?
+        <a href="/cadastro">Cadastre-se</a>
+      </p>
+    </div>
+
+  </div>
+</ion-content>
 </ion-app>
 
 <script>

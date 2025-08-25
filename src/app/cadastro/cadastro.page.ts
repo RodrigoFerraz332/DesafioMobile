@@ -1,13 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth.services';
 
-// Função de validação customizada para verificar se as senhas são iguais
+// Validador customizado: verifica se as senhas coincidem
 export function passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
   const password = control.get('password')?.value;
   const confirmPassword = control.get('confirmPassword')?.value;
+
+  if (!password || !confirmPassword) return null;
+
   return password === confirmPassword ? null : { passwordsMismatch: true };
 }
 
@@ -25,8 +30,9 @@ export class CadastroPage implements OnInit {
   private formBuilder = inject(FormBuilder);
   private router = inject(Router);
   private toastController = inject(ToastController);
+  private auth = inject(AuthService);
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.cadastroForm = this.formBuilder.group({
@@ -34,41 +40,46 @@ export class CadastroPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-    }, { validators: passwordsMatchValidator }); // Adiciona o validador no grupo
+    }, { validators: passwordsMatchValidator });
   }
 
-  /**
-   * Função chamada ao submeter o formulário de cadastro.
-   */
   cadastrar() {
     if (this.cadastroForm.invalid) {
-      // Verifica se o erro é de senhas não coincidentes
-      if (this.cadastroForm.errors?.['passwordsMismatch']) {
+      if (this.cadastroForm.hasError('passwordsMismatch')) {
         this.presentToast('As senhas não coincidem.');
       } else {
-        this.presentToast('Por favor, preencha todos os campos corretamente.');
+        const controls = this.cadastroForm.controls;
+        if (controls['name'].invalid) {
+          this.presentToast('Por favor, preencha o nome corretamente.');
+        } else if (controls['email'].invalid) {
+          this.presentToast('Por favor, preencha o email corretamente.');
+        } else if (controls['password'].invalid) {
+          this.presentToast('A senha deve ter no mínimo 6 caracteres.');
+        } else if (controls['confirmPassword'].invalid) {
+          this.presentToast('Por favor, confirme a senha.');
+        } else {
+          this.presentToast('Por favor, preencha todos os campos corretamente.');
+        }
       }
       return;
     }
 
-    console.log('Dados do novo usuário:', this.cadastroForm.value);
+    const { name, email, password } = this.cadastroForm.value;
+    const success = this.auth.registerUser(name, email, password);
 
-    // --- LÓGICA DE CADASTRO ---
-    // Aqui você chamaria seu serviço para criar o novo usuário no backend.
-    // Após o sucesso, você pode exibir uma mensagem e navegar para o login.
-
-    this.presentToast('Cadastro realizado com sucesso!', 'success');
-    this.router.navigateByUrl('/login');
+    if (success) {
+      this.presentToast('Cadastro realizado com sucesso!', 'success');
+      this.router.navigateByUrl('/login');
+    } else {
+      this.presentToast('Email já cadastrado.');
+    }
   }
 
-  /**
-   * Apresenta uma mensagem toast na tela.
-   */
   async presentToast(message: string, color: 'danger' | 'success' = 'danger') {
     const toast = await this.toastController.create({
-      message: message,
+      message,
       duration: 2500,
-      color: color,
+      color,
       position: 'top'
     });
     toast.present();
