@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  </head>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Botão para voltar para a tela de login -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class ="redefinir-senha-container">
+    <div class="texto-autenticador-cabeçalho">
+      <h1>Esqueceu sua senha?</h1>
+      <p>Para redefinir a sua senha, insira seu email.</p>
+    </div>
+    <div class="redefinir-senha-form">
+      <ion-item class="input-item">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" placeholder="Seu e-mail"></ion-input>
+        </ion-item>
+        <div class="conteiner-botoes">
+          <ion-button class="redefinir-senha-button" expand="block" shape="round"> 
+            Enviar
+          <ion-icon slot="end"></ion-icon>
+          </ion-button>
+        </div>
+    </div>
+  </div>
+</ion-content>
+</html>

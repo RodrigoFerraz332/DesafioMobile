@@ -29,6 +29,15 @@ const routes: Routes = [
     path: 'chat',
     loadComponent: () => import('./chat/chat.page').then( m => m.ChatPage)
   },
+  {
+    path: 'form-senha',
+    loadChildren: () => import('./form-senha/form-senha.module').then( m => m.FormSenhaPageModule)
+  },
+  {
+    path: 'redefinir-senha',
+    loadChildren: () => import('./redefinir-senha/redefinir-senha.module').then( m => m.RedefinirSenhaPageModule)
+  },
+
 
 ];
 
