@@ -1,0 +1,36 @@
+ion-content {
+  --background: #f4f5f8;
+}
+
+.redefinir-senha-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;   
+  height: 100%;
+}
+
+.redefinir-senha-form {
+  width: 100%;
+  max-width: 28rem; /* 448px */
+  height: 40%;
+}
+
+.input-item {
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  margin-bottom: 1rem; /* 16px */
+}
+
+h1 {
+    color: #1f2937;
+    font-size: 1.875rem;
+    font-weight: 700;
+}
+p {
+    margin-top: 0.5rem;
+    color: #6b7280;
+}
+
+

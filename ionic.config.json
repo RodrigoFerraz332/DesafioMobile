@@ -1,0 +1,7 @@
+{
+  "name": "Neto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

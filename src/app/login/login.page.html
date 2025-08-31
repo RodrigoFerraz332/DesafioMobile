@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tela de Login - Ionic</title>
+  <!-- Importação do Ionic -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  <!-- Importação dos Ícones do Ionic (Ionicons) -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <link rel="stylesheet" href="login.page.scss">
+</head>
+<body>
+<ion-app>
+  <ion-content class="ion-padding" fullscreen>
+    <div class="login-container">
+
+      <!-- Seção do Cabeçalho/Logo -->
+      <div class="header-section">
+        <img src="assets/neto.png" alt="Logo do App" class="logo">
+        <h1>Bem-vindo(a)!</h1>
+        <p>Faça login para continuar</p>
+      </div>
+
+      <!-- Formulário de Login -->
+      <div class="login-form">
+
+        <!-- Campo de E-mail -->
+        <ion-item class="input-item">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" placeholder="Seu e-mail"></ion-input>
+        </ion-item>
+
+        <!-- Campo de Senha -->
+        <ion-item class="input-item">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input type="password" placeholder="Sua senha"></ion-input>
+        </ion-item>
+
+        <!-- Botão de Login -->
+        <ion-button id="login-button" expand="block" shape="round">
+          Entrar
+          <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        </ion-button>
+
+        <!-- Link para Esqueceu a Senha -->
+        <div class="forgot-password-link">
+          <a href="./redefinir-senha">Esqueceu sua senha?</a>
+        </div>
+
+      </div>
+
+      <!-- Seção de Cadastro -->
+      <div class="signup-section">
+        <p>
+          Não tem uma conta?
+          <a href="./cadastro">Cadastre-se</a>
+        </p>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-app>
+
+<script>
+  // Configuração do Ionic para usar o tema do Material Design (opcional)
+  window.Ionic = {
+    mode: 'md'
+  }
+</script>
+</body>
+</html>

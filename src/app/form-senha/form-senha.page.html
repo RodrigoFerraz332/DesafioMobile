@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
+  </head>
+  <ion-content>
+  <div class ="redefinir-senha-container">
+    <div class="texto-autenticador-cabeçalho">
+      <h1>Redefina sua senha</h1>
+    </div>
+    <div class="redefinir-senha-form">
+      <form (ngSubmit)="submit()" [formGroup]="senhaForm" #formDir="ngForm">
+        <ion-item class="input-item">
+            <ion-input type="Password" placeholder="Digite sua nova senha" formControlName="novaSenha"></ion-input>
+            <div *ngIf="novaSenha.hasError('required') && novaSenha.touched">
+              <p>Nova senha obrigatória</p>
+            </div>
+            <div *ngIf="novaSenha.hasError('minlength') && novaSenha.touched">
+              <p>A senha deve ter pelo menos 6 caracteres</p>
+            </div>
+        </ion-item>
+        <ion-item class="input-item">
+            <ion-input type="Password" placeholder="Confirme sua senha" formControlName="confirmeSenha"></ion-input>
+            <div *ngIf="senhaForm.hasError('senhasDiferentes') && confirmeSenha.touched" class="validation-error">
+              <p>As senhas não conferem</p>
+            </div>
+        </ion-item>
+          <div class="conteiner-botoes">
+            <ion-button type="submit" class="redefinir-senha-button" expand="block" shape="round"> 
+              Salvar
+            </ion-button>
+          </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
+</html>

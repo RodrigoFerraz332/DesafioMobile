@@ -1,0 +1,58 @@
+<!-- O cabeçalho agora usa ion-header e ion-toolbar do Ionic -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      Assistente Digital
+    </ion-title>
+  </ion-toolbar>
+  <!-- A barra de navegação foi simplificada para um visual de app -->
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button href="./login">Início</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button href="/tutoriais" class="selected">Tutoriais</ion-button>
+      <ion-button href="/contato">Contato</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- O conteúdo principal usa ion-content para gerenciamento de scroll -->
+<ion-content class="ion-padding" #content>
+  <!-- A estrutura interna do seu chat foi mantida -->
+  <section id="chat-container">
+    <div id="chatHistory" class="chat-history-wrapper">
+      <!-- Mensagens do chat aparecerão aqui -->
+      <div *ngFor="let message of messages" class="message-wrapper">
+        <div class="chat-bubble" [ngClass]="{ 'user': message.sender === 'user', 'ia': message.sender === 'ia' }">
+          <p>{{ message.text }}</p>
+        </div>
+      </div>
+      <!-- Indicador de "digitando" -->
+      <div *ngIf="isLoading" class="message-wrapper">
+        <div class="chat-bubble ia typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</ion-content>
+
+<!-- O rodapé foi convertido para ion-footer -->
+<ion-footer class="ion-no-border">
+  <ion-toolbar class="input-toolbar">
+    <ion-textarea
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+      placeholder="Digite a sua pergunta aqui..."
+      class="chat-input"
+      autoGrow="true"
+      rows="3">
+    </ion-textarea>
+    <ion-buttons slot="end">
+      <ion-button (click)="sendMessage()" [disabled]="newMessage.trim() === ''" class="send-button">
+        <ion-icon slot="icon-only" name="paper-plane"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
