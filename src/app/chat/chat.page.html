@@ -11,8 +11,7 @@
       <ion-button href="./login">Início</ion-button>
     </ion-buttons>
     <ion-buttons slot="primary">
-      <ion-button href="/tutoriais" class="selected">Tutoriais</ion-button>
-      <ion-button href="/contato">Contato</ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -25,7 +24,7 @@
       <!-- Mensagens do chat aparecerão aqui -->
       <div *ngFor="let message of messages" class="message-wrapper">
         <div class="chat-bubble" [ngClass]="{ 'user': message.sender === 'user', 'ia': message.sender === 'ia' }">
-          <p>{{ message.text }}</p>
+          <div [innerHTML]="message.text"></div>
         </div>
       </div>
       <!-- Indicador de "digitando" -->

@@ -73,6 +73,8 @@ export class CadastroPage implements OnInit {
     } else {
       this.presentToast('Email já cadastrado.');
     }
+
+
   }
 
   async presentToast(message: string, color: 'danger' | 'success' = 'danger') {

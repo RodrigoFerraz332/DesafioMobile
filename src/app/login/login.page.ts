@@ -5,6 +5,8 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.services';
 
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -47,6 +49,8 @@ export class LoginPage implements OnInit {
     } else {
       this.presentToast('Email ou senha inválidos.');
     }
+
+
   }
 
   async presentToast(message: string) {
