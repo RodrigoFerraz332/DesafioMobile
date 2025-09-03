@@ -13,8 +13,9 @@ import { RedefinirSenhaPage } from './redefinir-senha.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RedefinirSenhaPageRoutingModule
+    RedefinirSenhaPageRoutingModule,
+    RedefinirSenhaPage
   ],
-  declarations: []
+  declarations: [] // Adicionado aqui
 })
 export class RedefinirSenhaPageModule {}
